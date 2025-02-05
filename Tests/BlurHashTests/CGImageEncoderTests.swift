@@ -5,15 +5,19 @@ import Testing
 
 @testable import BlurHash
 
-struct UIImageExtensionsTests {
+struct CGImageEncoderTests {
     @Test(arguments: TestConstants.sampleHashResults)
     func encode(name: String, expectedHash: String) throws {
         let imageURL = try #require(Bundle.module.url(forResource: "TestResources/\(name)", withExtension: "png"))
         let imageData = try Data(contentsOf: imageURL)
-        let image = try #require(UIImage(data: imageData))
 
-        let actualHash = try #require(image.blurHash(numberOfComponents: (4, 3)))
+        let dataProvider = try #require(CGDataProvider(data: imageData as CFData))
+        let imageSource = try #require(CGImageSourceCreateWithDataProvider(dataProvider, nil))
+        let image = try #require(CGImageSourceCreateImageAtIndex(imageSource, 0, nil))
+
+        let actualHash = try CGImageEncoder().encode(image, numberOfComponents: (4, 3))
         #expect(actualHash == expectedHash)
     }
 }
 #endif
+
