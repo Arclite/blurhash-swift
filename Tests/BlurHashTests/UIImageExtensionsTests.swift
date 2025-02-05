@@ -5,7 +5,7 @@ import Testing
 
 @testable import BlurHash
 
-struct BlurHashEncodeUIImageTests {
+struct UIImageExtensionsTests {
     private func encodeImage(named name: String) throws -> String {
         let imageURL = try #require(Bundle.module.url(forResource: "TestResources/\(name)", withExtension: "png"))
         let imageData = try Data(contentsOf: imageURL)
