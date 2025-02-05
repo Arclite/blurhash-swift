@@ -6,7 +6,7 @@ extension String {
     private static let decodeCharacters: [String: Int] = {
         var dict: [String: Int] = [:]
         for (index, character) in encodeCharacters.enumerated() {
-        dict[character] = index
+            dict[character] = index
         }
         return dict
     }()

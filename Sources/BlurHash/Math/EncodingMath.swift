@@ -15,17 +15,23 @@ func encodeAC(_ value: (Float, Float, Float), maximumValue: Float) -> Int {
     return quantR * 19 * 19 + quantG * 19 + quantB
 }
 
-extension BinaryInteger {
-    func encode83(length: Int) -> String {
-        var result = ""
-        for i in 1 ... length {
-            let digit = (Int(self) / pow(83, length - i)) % 83
-            result += String.encodeCharacters[Int(digit)]
-        }
-        return result
-    }
+func decodeDC(_ value: Int) -> (Float, Float, Float) {
+    let intR = value >> 16
+    let intG = (value >> 8) & 255
+    let intB = value & 255
+    return (Math.srgbToLinear(intR), Math.srgbToLinear(intG), Math.srgbToLinear(intB))
 }
 
-private func pow(_ base: Int, _ exponent: Int) -> Int {
-    return (0 ..< exponent).reduce(1) { value, _ in value * base }
+func decodeAC(_ value: Int, maximumValue: Float) -> (Float, Float, Float) {
+    let quantR = value / (19 * 19)
+    let quantG = (value / 19) % 19
+    let quantB = value % 19
+
+    let rgb = (
+        Math.signPow((Float(quantR) - 9) / 9, 2) * maximumValue,
+        Math.signPow((Float(quantG) - 9) / 9, 2) * maximumValue,
+        Math.signPow((Float(quantB) - 9) / 9, 2) * maximumValue
+    )
+
+    return rgb
 }
