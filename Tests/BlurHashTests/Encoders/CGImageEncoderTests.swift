@@ -1,6 +1,7 @@
-#if canImport(UIKit)
+#if canImport(CoreGraphics) && canImport(ImageIO)
+import CoreGraphics
 import Foundation
-import UIKit
+import ImageIO
 import Testing
 
 @testable import BlurHash
