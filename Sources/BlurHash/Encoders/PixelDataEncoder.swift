@@ -1,7 +1,9 @@
 import Foundation
 
-struct PixelDataEncoder {
-    func encode(_ pixels: PixelData, numberOfComponents components: (Int, Int)) throws -> String {
+public struct PixelDataEncoder {
+    public init() {}
+
+    public func encode(_ pixels: PixelData, numberOfComponents components: (Int, Int)) throws -> String {
         var factors: [(Float, Float, Float)] = []
         for y in 0 ..< components.1 {
             for x in 0 ..< components.0 {
