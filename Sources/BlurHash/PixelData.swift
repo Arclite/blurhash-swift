@@ -3,8 +3,8 @@ import Foundation
 public struct PixelData {
     let width: Int
     let height: Int
-    let bytesPerPixel: Int
-    let data: Data
+    public let bytesPerPixel: Int
+    public let data: Data
 
     public init(
         width: Int,

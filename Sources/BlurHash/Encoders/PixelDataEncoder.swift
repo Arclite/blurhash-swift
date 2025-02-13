@@ -1,6 +1,6 @@
 import Foundation
 
-public struct PixelDataEncoder {
+public struct PixelDataEncoder: Sendable {
     public init() {}
 
     public func encode(_ pixels: PixelData, numberOfComponents components: (Int, Int)) throws -> String {

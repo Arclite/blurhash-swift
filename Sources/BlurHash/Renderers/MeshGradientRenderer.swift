@@ -1,7 +1,7 @@
 #if canImport(SwiftUI)
 import SwiftUI
 
-@available(iOS 18.0, *)
+@available(macOS 15.0, iOS 18.0, *)
 public struct MeshGradientRenderer {
     public init() {}
 
